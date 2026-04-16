@@ -1,0 +1,69 @@
+[
+
+  {
+
+    "id": "the-weight-of-silence",
+
+    "title": "The Weight of Silence",
+
+    "subtitle": "How the absence of sound shapes our inner world more than any symphony ever could.",
+
+    "author": "Alina Voss",
+
+    "date": "2026-04-14",
+
+    "readTime": "6 min read",
+
+    "category": "Consciousness",
+
+    "thumbnail": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80&auto=format&fit=crop",
+
+    "url": "./posts/the-weight-of-silence.html"
+
+  },
+
+  {
+
+    "id": "cartography-of-memory",
+
+    "title": "Cartography of Memory",
+
+    "subtitle": "Mapping the invisible landscapes we carry within — and why forgetting is an act of creation.",
+
+    "author": "Rhea Nakamura",
+
+    "date": "2026-04-10",
+
+    "readTime": "9 min read",
+
+    "category": "Philosophy",
+
+    "thumbnail": "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=800&q=80&auto=format&fit=crop",
+
+    "url": "./posts/cartography-of-memory.html"
+
+  },
+
+  {
+
+    "id": "negative-space-and-the-soul",
+
+    "title": "Negative Space & the Soul",
+
+    "subtitle": "What minimalist architecture reveals about the structures of human longing.",
+
+    "author": "Julian Mercer",
+
+    "date": "2026-04-05",
+
+    "readTime": "7 min read",
+
+    "category": "Design",
+
+    "thumbnail": "https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=800&q=80&auto=format&fit=crop",
+
+    "url": "./posts/negative-space-and-the-soul.html"
+
+  }
+
+]
