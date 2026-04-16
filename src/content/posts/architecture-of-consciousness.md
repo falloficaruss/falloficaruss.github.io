@@ -1,7 +1,6 @@
 ---
 title: "The Architecture of Consciousness"
 subtitle: "Why the minimalist approach to cognitive framing helps us understand our deepest, most profound existential realities."
-author: "Jane Doe"
 date: 2026-10-18
 readTime: "8 min read"
 category: "Consciousness"
@@ -22,5 +21,3 @@ This is why minimalism in editorial and intellectual design resonates so deeply 
 As we navigate an era defined by overwhelming sensory input, curating the architecture of our own minds becomes paramount. We must choose the structural design of our thoughts: will we build cluttered museums, or open, airy sanctuaries?
 
 ---
-
-*Jane Doe is a cognitive philosopher and design theorist residing in Kyoto. She writes extensively about the intersection of consciousness, architecture, and silence.*

@@ -1,7 +1,6 @@
 ---
 title: "Cartography of Memory"
 subtitle: "Mapping the invisible landscapes we carry within — and why forgetting is an act of creation."
-author: "Rhea Nakamura"
 date: 2026-04-10
 readTime: "9 min read"
 category: "Philosophy"
@@ -28,5 +27,3 @@ The landscapes of memory are personal topographies that no one else can ever ful
 This should terrify us. Instead, it makes every act of sharing a memory into something sacred: a brief window into a landscape that only you have ever seen, offered to someone else as a gift they can never fully receive.
 
 ---
-
-*Rhea Nakamura is a cognitive scientist and memoirist based in Kyoto. Her work explores the intersection of neuroscience, personal narrative, and Japanese aesthetics of impermanence.*
