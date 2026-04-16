@@ -1,0 +1,163 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import { marked } from 'marked';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  return posts.map((post) => ({
+    params: { slug: post.id.replace(/\.md$/, '') },
+    props: { 
+      post: {
+        ...post,
+        slug: post.id.replace(/\.md$/, '')
+      }
+    },
+  }));
+}
+
+const { post } = Astro.props;
+const contentHtml = await marked.parse(post.body);
+
+const formatDate = (date: Date) => {
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+};
+---
+
+<Layout title={post.data.title} description={post.data.description}>
+  <!-- Reading Progress Bar -->
+  <div id="progress-container" class="fixed top-0 left-0 w-full h-1 z-50 pointer-events-none">
+    <div id="progress-bar" class="h-full bg-charcoal-light/80 dark:bg-charcoal-dark/80 w-0 transition-all duration-100 ease-out origin-left"></div>
+  </div>
+
+  <!-- Ghost Navigation Bar -->
+  <nav class="fixed w-full top-0 z-40 nav-ghost bg-paper-light/60 dark:bg-paper-dark/60 border-b border-transparent hover:border-gray-200 dark:hover:border-gray-800 transition-all duration-500">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center font-sans">
+      <a href="/" class="text-black dark:text-white tracking-[0.2em] text-xs font-semibold uppercase hover:opacity-70 transition-opacity">
+        Aether & Form
+      </a>
+      <div class="flex items-center space-x-8">
+        <a href="/" class="text-black dark:text-white text-xs uppercase tracking-wider font-medium hover:opacity-60 transition-opacity hidden sm:block">Essays</a>
+        <button id="theme-toggle" class="p-1 rounded-full text-black dark:text-white hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors focus:outline-none">
+          <span class="sr-only">Toggle Dark Mode</span>
+          <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+          </svg>
+          <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Image Section -->
+  <div class="w-full h-[60vh] md:h-[75vh] overflow-hidden relative mt-0">
+    <img 
+      src={post.data.image} 
+      alt={post.data.title}
+      class="w-full h-full object-cover filter brightness-[0.85] contrast-105 dark:brightness-75 transition-all duration-700" 
+    />
+  </div>
+
+  <!-- Article Content -->
+  <main class="flex-grow">
+    <article class="max-w-reader mx-auto px-6 py-16 md:py-24">
+      <header class="text-center mb-16 md:mb-24">
+        <h1 class="font-serif text-4xl md:text-5xl lg:text-[4rem] font-bold leading-[1.1] mb-8 text-black dark:text-white tracking-tight">
+          {post.data.title}
+        </h1>
+        <h2 class="font-serif text-xl md:text-2xl italic text-black dark:text-white mb-10 leading-relaxed max-w-2xl mx-auto font-normal">
+          {post.data.subtitle}
+        </h2>
+        
+        <div class="flex items-center justify-center space-x-4 font-sans text-[0.7rem] uppercase tracking-[0.2em] text-black dark:text-white border-t border-gray-200 dark:border-gray-800 pt-8 w-max mx-auto">
+          <span>By <span class="font-semibold text-black dark:text-white">{post.data.author}</span></span>
+          <span class="opacity-50">✦</span>
+          <span>{formatDate(post.data.date)}</span>
+          <span class="opacity-50">✦</span>
+          <span>{post.data.readTime}</span>
+        </div>
+      </header>
+
+      <!-- Article Body -->
+      <div class="font-serif text-[1.1rem] md:text-[1.25rem] leading-[1.8] md:leading-[1.9] text-black dark:text-white space-y-9 prose prose-lg dark:prose-invert max-w-none">
+        <div set:html={contentHtml} />
+      </div>
+    </article>
+  </main>
+
+  <!-- Back to Essays Link -->
+  <div class="max-w-reader mx-auto px-6 pb-16">
+    <a href="/" class="inline-flex items-center font-sans text-xs uppercase tracking-[0.2em] text-black dark:text-white hover:text-charcoal-light dark:hover:text-charcoal-dark transition-colors group">
+      <svg class="w-4 h-4 mr-2 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+      </svg>
+      All Essays
+    </a>
+  </div>
+
+  <!-- Minimalist Footer -->
+  <footer class="border-t border-gray-200 dark:border-gray-800 py-10 mt-auto">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center font-sans text-xs uppercase tracking-widest text-black dark:text-white">
+      <span class="mb-4 md:mb-0">© 2026 Aether & Form. All Rights Reserved.</span>
+      <div class="flex space-x-6">
+        <a href="#" class="hover:text-charcoal-light dark:hover:text-gray-300 transition-colors">Twitter</a>
+        <a href="#" class="hover:text-charcoal-light dark:hover:text-gray-300 transition-colors">Instagram</a>
+        <a href="#" class="hover:text-charcoal-light dark:hover:text-gray-300 transition-colors">RSS</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const themeToggleDarkIcon = document.getElementById("theme-toggle-dark-icon");
+      const themeToggleLightIcon = document.getElementById("theme-toggle-light-icon");
+      const themeToggleBtn = document.getElementById("theme-toggle");
+
+      if (document.documentElement.classList.contains("dark")) {
+        themeToggleLightIcon?.classList.remove("hidden");
+      } else {
+        themeToggleDarkIcon?.classList.remove("hidden");
+      }
+
+      themeToggleBtn?.addEventListener("click", function () {
+        themeToggleDarkIcon?.classList.toggle("hidden");
+        themeToggleLightIcon?.classList.toggle("hidden");
+
+        if (document.documentElement.classList.contains("dark")) {
+          document.documentElement.classList.remove("dark");
+          localStorage.setItem("color-theme", "light");
+        } else {
+          document.documentElement.classList.add("dark");
+          localStorage.setItem("color-theme", "dark");
+        }
+      });
+
+      const progressBar = document.getElementById("progress-bar");
+      const updateProgress = () => {
+        const scrollPosition = window.scrollY;
+        const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
+        if (documentHeight > 0 && progressBar) {
+          progressBar.style.width = (scrollPosition / documentHeight) * 100 + "%";
+        }
+      };
+
+      let isScrolling = false;
+      window.addEventListener("scroll", () => {
+        if (!isScrolling) {
+          window.requestAnimationFrame(() => {
+            updateProgress();
+            isScrolling = false;
+          });
+          isScrolling = true;
+        }
+      });
+      updateProgress();
+    });
+  </script>
+</Layout>

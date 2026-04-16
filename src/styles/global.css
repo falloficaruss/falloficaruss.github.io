@@ -1,0 +1,78 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --color-paper-light: #FAFAFA;
+  --color-paper-dark: #121212;
+  --color-charcoal-light: #000000;
+  --color-charcoal-dark: #E0E0E0;
+
+  --font-serif: "Playfair Display", serif;
+  --font-sans: "Inter", sans-serif;
+
+  --spacing-reader: 720px;
+}
+
+/* Base text color - LIGHT MODE (default) */
+body {
+  background-color: #FAFAFA;
+  color: #000000;
+}
+
+/* Dark mode text - when html has class="dark" */
+html.dark body {
+  background-color: #121212;
+  color: #E0E0E0;
+}
+
+/* Force all text to be black in light mode */
+body, body * {
+  color: #000000 !important;
+}
+
+/* Override for dark mode - all text to be light in dark mode */
+html.dark body, html.dark body * {
+  color: #E0E0E0 !important;
+}
+
+.drop-cap:first-letter {
+  float: left;
+  font-size: 5.8rem;
+  line-height: 0.7;
+  padding-top: 0.35rem;
+  padding-right: 0.75rem;
+  font-family: var(--font-serif);
+  font-weight: 700;
+}
+
+.pull-quote {
+  font-size: 1.85rem;
+  line-height: 1.45;
+  margin: 4rem 0 4rem -3rem;
+  padding-left: 2.5rem;
+  border-left: 1px solid currentColor;
+  font-style: italic;
+  break-inside: avoid;
+  opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+  .pull-quote {
+    margin: 3rem 0;
+    padding-left: 1.5rem;
+    font-size: 1.5rem;
+  }
+}
+
+::selection {
+  background-color: rgba(51, 51, 51, 0.2);
+}
+
+html.dark ::selection {
+  background-color: rgba(224, 224, 224, 0.2);
+}
+
+.nav-ghost {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
