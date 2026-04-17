@@ -1,7 +1,7 @@
 ---
 title: "The Architecture of Consciousness"
 subtitle: "Why the minimalist approach to cognitive framing helps us understand our deepest, most profound existential realities."
-date: 2026-10-18
+date: 2026-3-18
 readTime: "8 min read"
 category: "Consciousness"
 description: "A deep dive into minimalist cognitive framing and spatial metaphors in human consciousness."
